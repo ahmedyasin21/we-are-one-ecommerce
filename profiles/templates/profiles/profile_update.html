@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+  {% include 'snippets/dashboard_sidebar.html' with shop=shop %}
+
+
+
+<div class="container">
+ <style>
+{% comment %} body {
+    margin: 0;
+    padding-top: 40px;
+    color: #2e323c;
+    background: #f5f6fa;
+    position: relative;
+    height: 100%;
+} {% endcomment %}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+	
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #9fa8b9;
+	padding: 1rem;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 14px;
+}
+.form-control {
+    border: 1px solid #cfd1d8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 14px;
+    background: #ffffff;
+    color: #2e323c;
+}
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+    padding:20px;
+}
+.detail_body{
+	padding-right:60px;
+}
+.user_profile{
+
+    text-align:center;
+    font-weight:600;
+    border:2px solid black;
+	width:87%;
+}
+
+.off-button {
+	position:relative;
+	{% comment %} right:400px; {% endcomment %}
+}
+  
+ </style>
+
+
+
+<div class="container">
+{% for message in messages %}
+    {% if message %}
+            <div class="alert alert-success text-center" style="textalign:center;width:87%">
+                <button type="button" class="close off-button" data-dismiss="alert" aria-hidden="true">
+                    ×</button>
+               {% comment %} <span class="glyphicon glyphicon-cross"></span> <strong>You're successfully registered</strong> {% endcomment %}
+                {% comment %} <hr class="message-inner-separator"> {% endcomment %}
+                <p>{{message}}</p>
+            </div>
+    {% endif %}
+    {% endfor %}
+<h1><p class="user_profile">USER PROFILE</p></h1>
+
+<div class="row gutters">
+<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="account-settings">
+			<div class="user-profile">
+				<div class="user-avatar">
+					<img src="{{request.user.userprofile.avatar.url}}" alt="{{user.username}}">
+				</div>
+				<h5 class="user-name">{{user.username}}</h5>
+				<h6 class="user-email">{{user.email}}</h6>
+			</div>
+          
+			<div class="about">
+				<h5>About</h5>
+				<p>{{user.userprofile.bio}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 col-12 detail_body">
+
+	<div class="card h-100">
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="card-body">
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<h6 class="mb-2 text-primary">Personal Details</h6>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					
+						<div class="form-group">
+							{% bootstrap_field form.avatar %}
+						</div>
+				
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+							{% comment %} <label for="disabledInput">USERNAME</label> {% endcomment %}
+							{% bootstrap_field form.username %}
+						</div>
+					</div> 
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.email %}
+							{% comment %} <label for="eMail">Email</label>
+							<input type="email" class="form-control" id="eMail" placeholder="Enter email ID"> {% endcomment %}
+						</div>
+					</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.first_name %}
+							{% comment %} <label for="id_first_name">First Name</label> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+							{% comment %} <label for="id_last_name">Last Name</label> {% endcomment %}
+							{% bootstrap_field form.last_name %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.bio %}
+							{% comment %} <label for="fullName">Full Name</label>
+							<input type="text" class="form-control" id="fullName" placeholder="Enter full name"> {% endcomment %}
+						</div> 
+					</div>
+				
+					
+					{% comment %} <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.website %}
+							<label for="website">Website URL</label>
+							<input type="url" class="form-control" id="website" placeholder="Website url">
+						</div>
+					</div> {% endcomment %}
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+							{% bootstrap_field form.age %}
+						</div>
+					</div>
+				
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+							{% comment %} <label for="id_gender">Gender</label> {% endcomment %}
+							{% bootstrap_field form.gender %}
+						</div>
+					</div> 
+					
+
+				</div>
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<h6 class="mt-3 mb-2 text-primary">Present Address</h6>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.street_address %}
+							{% comment %} <label for="Street">Street</label>
+							<input type="name" class="form-control" id="Street" placeholder="Enter Street"> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.city %}
+							{% comment %} <label for="ciTy">City</label>
+							<input type="name" class="form-control" id="ciTy" placeholder="Enter City"> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.nationality %}
+							{% comment %} <label for="sTate">State</label>
+							<input type="text" class="form-control" id="sTate" placeholder="Enter State"> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.state %}
+							{% comment %} <label for="sTate">State</label>
+							<input type="text" class="form-control" id="sTate" placeholder="Enter State"> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+						{% bootstrap_field form.zip_code %}
+							{% comment %} <label for="zIp">Zip Code</label>
+							<input type="text" class="form-control" id="zIp" placeholder="Zip Code"> {% endcomment %}
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="form-group">
+							{% comment %} <label for="id_country">Country</label> {% endcomment %}
+							{% bootstrap_field form.country %}
+						</div>
+					</div>
+					
+				</div>
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="text-right">
+							{% comment %} <button type="submit" id="submit" name="submit" class="btn btn-secondary">Cancel</button> {% endcomment %}
+							<button type="submit" class="btn btn-primary">Update</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>
+</div>
+
+
+</div>
+{% comment %} {% bootstrap_field form.username %} {% endcomment %}
+  {% comment %} <img src="{{request.user.userprofile.avatar.url}}" class="img-resonsive img-circle" alt="..."></span> {% endcomment %}
+     {% comment %} <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {% bootstrap_form form %}
+    
+     <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button> 
+    </form>   {% endcomment %}
+</div>
+
+{% endblock content %}

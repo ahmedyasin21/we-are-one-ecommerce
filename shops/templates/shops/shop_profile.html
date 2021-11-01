@@ -1,0 +1,541 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block content %}
+{% include 'snippets/dashboard_sidebar.html' with shop=shop %}
+<style>
+{% comment %} body{margin-top:20px;
+background:#eee;
+} {% endcomment %}
+
+/**
+ * User Profile
+ */
+.user-profile__avatar,
+.user-avatar {
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.user-profile__avatar > img,
+.user-avatar > img {
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.user-profile__title {
+  font-weight: 700;
+}
+.user-profile__desc {
+  color: #777777;
+}
+.user-profile__url {
+  margin-bottom: 20px;
+}
+.user-profile__info {
+  margin: 20px 0;
+  padding-left: 0;
+  list-style: none;
+}
+.user-profile__info > li {
+  padding: 5px 0;
+}
+.user-profile__info > li .fa {
+  margin-right: 10px;
+}
+.user-profile__tabs {
+  margin-top: 40px;
+}
+
+
+
+
+/**
+ * Portfolio
+ */
+/* Portfolio navigation */
+.portfolio__nav {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 40px;
+  margin-top: -20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.portfolio__nav > li {
+  display: inline-block;
+}
+.portfolio__nav > li > a {
+  display: block;
+  padding: 20px 10px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  color: #757575;
+  -webkit-transition: all .05s linear;
+       -o-transition: all .05s linear;
+          transition: all .05s linear;
+}
+.portfolio__nav > li > a:hover,
+.portfolio__nav > li > a:focus {
+  color: #333333;
+  text-decoration: none;
+}
+.portfolio__nav > li.active > a {
+  color: #ed3e49;
+  border-bottom-color: #ed3e49;
+}
+@media (max-width: 767px) {
+  .portfolio__nav {
+    border-bottom: 0;
+  }
+  .portfolio__nav > li {
+    display: block;
+  }
+  .portfolio__nav > li > a {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .portfolio__nav > li.active > a {
+    font-weight: 600;
+  }
+}
+/* Portfolio thumbnails */
+.isotope-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* Firefox bug fix */
+@media (min-width: 1200px) {
+  .col-lg-4.isotope-item {
+    width: 33%;
+  }
+}
+.portfolio__item {
+  margin-bottom: 20px;
+}
+.portfolio-item__img {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.portfolio-item__img:hover .portfolio-item__mask {
+  background: rgba(255, 255, 255, 0.9);
+}
+.portfolio-item__img:hover .portfolio-item-mask__content {
+  top: 0;
+}
+.portfolio-item__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  -webkit-transition: background .3s;
+       -o-transition: background .3s;
+          transition: background .3s;
+}
+@media (max-width: 767px) {
+  .portfolio-item__mask {
+    visibility: hidden;
+  }
+}
+.portfolio-item-mask__content {
+  position: absolute;
+  display: block;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+  overflow: hidden;
+  color: #333333;
+  text-decoration: none;
+  -webkit-transition: top .3s;
+       -o-transition: top .3s;
+          transition: top .3s;
+}
+.portfolio-item-mask__title {
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.portfolio-item-mask__summary {
+  font-size: 12px;
+}
+.portfolio-item__recent > [class*="col-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tab-pane {
+    padding-top: 20px;
+}
+
+.panel-body > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.panel-body > ul > li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.panel-body > ul > li > a {
+    display: block;
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 11px;
+    color: #777777;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+{% comment %} .img-circle {
+    border-radius:50%;
+} {% endcomment %}
+.image-size{
+  height:180px;
+  width:300px;
+}
+
+
+</style> 
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="user-profile__avatar shadow-effect text-center">
+        <img class="img-responsive center-block img-circle" src="{{object.shop_bg.url}}" alt="...">
+        {{object.title}}
+        <p class="text-muted">{{object.shop_category}}</p>
+      </div>
+
+      {% if user == object.shop_owner %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          User Menu
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li><a href="{% url "profiles:profile" %}"><i class="fa fa-user"></i> My User Profile</a></li>
+            <li><a href="{% url 'shops:shop_profile_update' slug=object.slug %}"><i class="fa fa-edit"></i> Edit Shop Profile</a></li>
+            {% comment %} <li><a href="#"><i class="fa fa-envelope-o"></i> Messages</a></li>
+            <li><a href="#"><i class="fa fa-sign-out"></i> Sign Out</a></li> {% endcomment %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-sm-6">
+          
+          <!-- User name -->
+          <h3 class="user-profile__title">{{object.title}}</h3>
+          
+          <!-- User description -->
+          <p class="user-profile__desc">
+            {{object.description}}
+          </p>
+          <!-- User URL -->
+          <div class="user-profile__url">
+            <span><p><b>Your shop url </b>:<a href="{{request.path}}">http://127.0.0.1:8000{{request.path }}</a></p></span>
+          </div>
+          <!-- User social links -->
+          <div class="social">
+            <ul class="list-inline">
+
+              {% if object.twitter  %}
+              <li>
+                <a href="{{object.twitter}}" class="twitter"><i class="fa fa-twitter"></i></a>
+              </li>
+              {% endif %}
+
+              {% if object.facebook  %}
+              <li>
+                <a href="{{object.facebook}}" class="facebook"><i class="fa fa-facebook"></i></a>
+              </li>
+              {% endif %}
+
+              {% if object.pinterest  %}
+              <li>
+                <a href="{{object.pinterest}}" class="pinterest"><i class="fa fa-pinterest"></i></a>
+              </li>
+              {% endif %}
+
+               {% if object.instagram  %}
+              <li>
+                <a href="{{object.instagram}}" class="instagram"><i class="fa fa-instagram"></i></a>
+              </li>
+              {% endif %}
+               {% if object.youtube  %}
+              <li>
+                <a href="{{object.youtube}}" class="youtube"><i class="fa fa-youtube"></i></a>
+              </li>
+              {% endif %}
+
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          
+          <!-- Profile info -->
+          <ul class="user-profile__info">
+            <li>
+              <i class="fa fa-calendar-o"></i> Member for {{object.create_date|timesince}}
+            </li>
+             <li>
+              <i class="fa fa-eye"></i> Total products {{products_count}}
+            </li>
+            {% comment %} <li>
+              <i class="fa fa-clock-o"></i> Last seen 2 hours ago
+            </li>
+            <li>
+              <i class="fa fa-eye"></i> 50 profile views
+            </li> {% endcomment %}
+          </ul>
+        </div>
+        <div class="col-sm-12">
+          <div class="user-profile__tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#user-profile__portfolio" aria-controls="user-profile__portfolio" role="tab" data-toggle="tab" aria-expanded="true">My Products</a>
+              </li>
+              {% comment %} <li role="presentation" class="">
+                <a href="#user-profile__shopping-cart" aria-controls="user-profile__shopping-cart" role="tab" data-toggle="tab" aria-expanded="false">My Shopping Cart</a>
+              </li> {% endcomment %}
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="width:80%;">
+              <div role="tabpanel" class="tab-pane fade active in" id="user-profile__portfolio">             
+                <div class="row">
+                  {% for product in products %}
+                  <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="{% url "products:product_detail" slug=product.slug%}">
+                          <img src="{{product.image_one.url}}" class="img-responsive image-size" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                {{product.title}}
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                {{product.description|truncatewords:22}}
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+                  </div>
+                  {% endfor %}
+                  {% comment %} <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="portfolio-item.html">
+                          <img src="https://via.placeholder.com/340x210/6495ED/000000" class="img-responsive" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                Image title
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                Pellentesque metus arcu, placerat nec porta in, ultricies id enim.
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="portfolio-item.html">
+                          <img src="https://via.placeholder.com/340x210/9932CC/000000" class="img-responsive" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                Image title
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                Pellentesque metus arcu, placerat nec porta in, ultricies id enim.
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4">
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="portfolio-item.html">
+                          <img src="https://via.placeholder.com/340x210/FF1493/000000" class="img-responsive" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                Image title
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                Pellentesque metus arcu, placerat nec porta in, ultricies id enim.
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4">
+
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="portfolio-item.html">
+                          <img src="https://via.placeholder.com/340x210/20B2AA/000000" class="img-responsive" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                Image title
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                Pellentesque metus arcu, placerat nec porta in, ultricies id enim.
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-4">
+
+                    <div class="portfolio__item">
+                      <div class="portfolio-item__img">
+                        <a href="portfolio-item.html">
+                          <img src="https://via.placeholder.com/340x210/B0C4DE/000000" class="img-responsive" alt="...">
+                          <div class="portfolio-item__mask">
+                            <div class="portfolio-item-mask__content">
+                              <div class="portfolio-item-mask__title">
+                                Image title
+                              </div>
+                              <div class="portfolio-item-mask__summary">
+                                Pellentesque metus arcu, placerat nec porta in, ultricies id enim.
+                              </div>
+                            </div> <!-- / .portfolio-item-mask__content -->
+                          </div> <!-- / .portfolio-item__mask -->
+                        </a>
+                      </div> <!-- / .portfolio-item__img -->
+                    </div> <!-- / .portfolio__item -->
+                  </div> {% endcomment %}
+                </div> <!-- / .row -->
+              </div> <!-- / .tab-pane -->
+              <div role="tabpanel" class="tab-pane fade" id="user-profile__shopping-cart">
+                <div class="table-responsive">
+                  <table class="table table-bordered shopping-cart__table">
+                  <thead>
+                    <tr>
+                      <th>Preview</th>
+                      <th>Item</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="js-shop__item">
+                      <td>
+                        <img class="img-responsive shopping-cart-item__img" src="https://via.placeholder.com/50x50/" alt="...">
+                      </td>
+                      <td>
+                        <div class="shopping-cart-item__title">
+                          Product Title
+                        </div>
+                        <div class="shopping-cart-item__desc">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+                        </div>
+                      </td>
+                      <td>$<span class="js-shop-item__price">59.99</span></td>
+                      <td>
+                        <input type="number" class="js-shop-item__quantity form-control" min="1" max="100" step="1" value="1">
+                      </td>
+                    </tr>
+                    <tr class="js-shop__item">
+                      <td>
+                        <img class="img-responsive shopping-cart-item__img" src="https://via.placeholder.com/50x50/" alt="...">
+                      </td>
+                      <td>
+                        <div class="shopping-cart-item__title">
+                          Product Title
+                        </div>
+                        <div class="shopping-cart-item__desc">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+                        </div>
+                      </td>
+                      <td>$<span class="js-shop-item__price">59.99</span></td>
+                      <td>
+                        <input type="number" class="js-shop-item__quantity form-control" min="1" max="100" step="1" value="1">
+                      </td>
+                    </tr>
+                    <tr class="js-shop__item">
+                      <td>
+                        <img class="img-responsive shopping-cart-item__img" src="https://via.placeholder.com/50x50/" alt="...">
+                      </td>
+                      <td>
+                        <div class="shopping-cart-item__title">
+                          Product Title
+                        </div>
+                        <div class="shopping-cart-item__desc">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
+                        </div>
+                      </td>
+                      <td>$<span class="js-shop-item__price">59.99</span></td>
+                      <td>
+                        <input type="number" class="js-shop-item__quantity form-control" min="1" max="100" step="1" value="1">
+                      </td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div> <!-- / .table-responsive -->
+                <ul class="shopping-cart__checkout">
+                  <li><strong>Total Price</strong>: $<span class="js-shop__total-price"></span></li>
+                  <li><strong>Shipping</strong>: Free</li>
+                  <li>
+                    <a href="#" class="btn btn-secondary">Proceed to checkout</a>
+                  </li>
+                </ul>
+              </div> <!-- / .tab-pane -->
+            </div> <!-- / .tab-content -->
+          </div>
+        </div>
+      </div> <!-- / .row -->
+    </div>
+  </div> <!-- / .row -->
+</div>
+
+
+{% endblock content %}
+
+{% comment %} {% block content %}
+<div class="container">
+ {% include 'snippets/dashboard_sidebar.html' with shop=shop %}
+
+    {% if user == object.shop_owner %}
+    <a href="{% url 'shops:shop_profile_update' slug=object.slug %}" class="btn btn-success">Update</a>
+    {% endif %}
+    <img src="{{object.shop_bg.url }}" class="img-fluid" alt="Responsive image" style="margin-left: 150px;margin-right: auto;">
+
+
+    <div style="text-align:center">
+        <h3>Shop Title : {{object.title}}</h3>
+        <h4>Shop Address : {{object.shop_address}}</h4>
+        <span> <p>Customers : {{object.customers.count}}</p><p>Favorite Customers : {{object.customers_favorite.count}}</p></span>
+        <p>products : {{products_count}}</p>
+    </div>
+</div>
+{% endblock content %} {% endcomment %}

@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+{% load static %}
+{% load bootstrap3 %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Mobile Web-app fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Meta tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <!--Title-->
+    <title>Contact us</title>
+
+    <!--CSS bundle -->
+   {% include 'landing_page/snippets/base_css.html' %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="page-loader"></div>
+
+    <div class="wrapper">
+
+        <!-- ======================== Navigation ======================== -->
+
+        <nav>
+
+            <div class="clearfix">
+
+                <a href="{% url 'home'%}" class="logo"><img src="{% static 'weareone/assets/images/logo.png'%}" alt="" /></a>
+
+                <!-- ==========  Pre navigation ========== -->
+
+                <div class="navigation navigation-pre clearfix">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-heart-pulse"></i> Help center</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-cart"></i> Shipping & Returns</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-cog"></i> Gift cards</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#"><i class="icon icon-map"></i> Store locator</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========  Top navigation ========== -->
+
+                <div class="navigation navigation-top clearfix">
+                    <ul>
+                        <!--add active class for current page-->
+                        <li class="left-side"><a href="{% url 'home' %}" class="logo-icon"><img src="{% static 'weareone/assets/images/icon.png'%}" alt="Alternate Text" /></a></li>
+                        <li class="left-side"><a href="#">Man</a></li>
+                        <!--
+                            
+                            // Use active class for current state
+
+                            <li class="left-side active"><a href="#">Man</a></li>
+
+                        -->
+                        <li class="left-side"><a href="#">Woman</a></li>
+                        <li class="left-side"><a href="#">Kids</a></li>
+                        <li><a href="javascript:void(0);" class="open-login"><i class="icon icon-user"></i></a></li>
+                        {% comment %} <li><a href="javascript:void(0);" class="open-search"><i class="icon icon-magnifier"></i></a></li>
+                        <li><a href="javascript:void(0);" class="open-cart"><i class="icon icon-cart"></i> <span>4</span></a></li> {% endcomment %}
+                    </ul>
+                </div>
+
+                <!-- ==========  Main navigation ========== -->
+
+                <div class="navigation navigation-main">
+                    <a href="#" class="open-login"><i class="icon icon-user"></i></a>
+                    <a href="#" class="open-search"><i class="icon icon-magnifier"></i></a>
+                    <a href="#" class="open-cart"><i class="icon icon-cart"></i> <span>4</span></a>
+                    <a href="#" class="open-menu"><i class="icon icon-menu"></i></a>
+                    <div class="floating-menu">
+                        <!--mobile toggle menu trigger-->
+                        <div class="close-menu-wrapper">
+                            <span class="close-menu"><i class="icon icon-cross"></i></span>
+                        </div>
+                        <ul>
+                            <li><a href="{% url 'home'%}">Home</a></li>
+                            <!-- <li><a href="products-grid.html">Shop</a></li> -->
+                            <li><a href="{% url 'aboutus'%}">About</a></li>
+                            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                            
+                            <li class="nav-settings">
+                                <a href="javascript:void(0);"><span class="nav-settings-value">USD</span> <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul class="nav-settings-list">
+                                                    <li><a href="javascript:void(0);">USD</a></li>
+                                                    <li><a href="javascript:void(0);">EUR</a></li>
+                                                    <li><a href="javascript:void(0);">GBP</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-settings">
+                                <a href="javascript:void(0);"><span class="nav-settings-value">ENG</span> <span class="open-dropdown"><i class="fa fa-angle-down"></i></span></a>
+                                <div class="navbar-dropdown navbar-dropdown-single">
+                                    <div class="navbar-box">
+                                        <div class="box-full">
+                                            <div class="box clearfix">
+                                                <ul class="nav-settings-list">
+                                                    <li><a href="javascript:void(0);">ENG</a></li>
+                                                    <li><a href="javascript:void(0);">GER</a></li>
+                                                    <li><a href="javascript:void(0);">لعربية</a></li>
+                                                    <li><a href="javascript:void(0);">עִבְרִית</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ==========  Search wrapper ========== -->
+
+                <div class="search-wrapper">
+                    <input class="form-control" placeholder="Search..." />
+                    <button class="btn btn-main">Go!</button>
+                </div>
+
+                <!-- ==========  Login wrapper ========== -->
+
+                <div class="login-wrapper" style="text-align:center">
+                 {% comment %} <div class="btn btn-warning"><a href="{% url 'accounts:login' %}"><h4>Sign In</h4></a></div> {% endcomment %}
+                    <div class="h4">Sign in</div> 
+                    {% comment %} <div class="btn btn-primary"><a href="{% url 'accounts:signup' %}">Sign up</a></div>  {% endcomment %}
+                    <form method="POST">{% csrf_token %}
+                        <div class="form-group">
+                        {% bootstrap_field form.username %}
+                            {% comment %} <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"> {% endcomment %}
+                        </div>
+                        <div class="form-group">
+                        {% bootstrap_field form.password %}
+                            {% comment %} <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> {% endcomment %}
+                        </div>
+                        <div class="form-group">
+                            <a href="{% url 'password_reset'%}" class="open-popup">Forgot password?</a>
+                            <a href="{% url 'accounts:signup'%}" class="open-popup">Don't have an account?</a>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-main">Submit</button>
+                    </form> 
+                </div>
+
+                <!-- ==========  Cart wrapper ========== -->
+
+                <div class="cart-wrapper">
+                    <div class="checkout">
+                        <div class="clearfix">
+
+                            <!--cart item-->
+
+                            <div class="row">
+
+                                <div class="cart-block cart-block-item clearfix">
+                                    <div class="image">
+                                        <a href="product.html"><img src="assets/images/product-1.png" alt="" /></a>
+                                    </div>
+                                    <div class="title">
+                                        <div><a href="product.html">Product item</a></div>
+                                        <small>Product category</small>
+                                    </div>
+                                    <div class="quantity">
+                                        <input type="number" value="2" class="form-control form-quantity" />
+                                    </div>
+                                    <div class="price">
+                                        <span class="final">$ 1.998</span>
+                                        <span class="discount">$ 2.666</span>
+                                    </div>
+                                    <!--delete-this-item-->
+                                    <span class="icon icon-cross icon-delete"></span>
+                                </div>
+
+                                <!--cart item-->
+
+                                <div class="cart-block cart-block-item clearfix">
+                                    <div class="image">
+                                        <a href="product.html"><img src="assets/images/product-2.png" alt="" /></a>
+                                    </div>
+                                    <div class="title">
+                                        <div><a href="product.html">Product item</a></div>
+                                        <small>Product category</small>
+                                    </div>
+                                    <div class="quantity">
+                                        <input type="number" value="2" class="form-control form-quantity" />
+                                    </div>
+                                    <div class="price">
+                                        <span class="final">$ 1.998</span>
+                                        <span class="discount">$ 2.666</span>
+                                    </div>
+                                    <!--delete-this-item-->
+                                    <span class="icon icon-cross icon-delete"></span>
+                                </div>
+
+                                <!--cart item-->
+
+                                <div class="cart-block cart-block-item clearfix">
+                                    <div class="image">
+                                        <a href="product.html"><img src="assets/images/product-3.png" alt="" /></a>
+                                    </div>
+                                    <div class="title">
+                                        <div><a href="product.html">Product item</a></div>
+                                        <small>Product category</small>
+                                    </div>
+                                    <div class="quantity">
+                                        <input type="number" value="2" class="form-control form-quantity" />
+                                    </div>
+                                    <div class="price">
+                                        <span class="final">$ 1.998</span>
+                                        <span class="discount">$ 2.666</span>
+                                    </div>
+                                    <!--delete-this-item-->
+                                    <span class="icon icon-cross icon-delete"></span>
+                                </div>
+
+                                <!--cart item-->
+
+                                <div class="cart-block cart-block-item clearfix">
+                                    <div class="image">
+                                        <a href="product.html"><img src="assets/images/product-4.png" alt="" /></a>
+                                    </div>
+                                    <div class="title">
+                                        <div><a href="product.html">Product item</a></div>
+                                        <small>Product category</small>
+                                    </div>
+                                    <div class="quantity">
+                                        <input type="number" value="2" class="form-control form-quantity" />
+                                    </div>
+                                    <div class="price">
+                                        <span class="final">$ 1.998</span>
+                                        <span class="discount">$ 2.666</span>
+                                    </div>
+                                    <!--delete-this-item-->
+                                    <span class="icon icon-cross icon-delete"></span>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!--cart prices -->
+
+                            <div class="clearfix">
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Discount 15%</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 159,00</span>
+                                    </div>
+                                </div>
+
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Shipping</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 30,00</span>
+                                    </div>
+                                </div>
+
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>VAT</strong>
+                                    </div>
+                                    <div>
+                                        <span>$ 59,00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <!--cart final price -->
+
+                            <div class="clearfix">
+                                <div class="cart-block cart-block-footer clearfix">
+                                    <div>
+                                        <strong>Total</strong>
+                                    </div>
+                                    <div>
+                                        <div class="h4 title">$ 1259,00</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--cart navigation -->
+
+                            <div class="cart-block-buttons clearfix">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="products-grid.html" class="btn btn-clean-dark">Continue shopping</a>
+                                    </div>
+                                    <div class="col-xs-6 text-right">
+                                        <a href="checkout-1.html" class="btn btn-main"><span class="icon icon-cart"></span> Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <!-- ========================  Main header ======================== -->
+
+        <section class="main-header" style="background-image:url(assets/images/gallery-2.jpg)">
+            <header>
+                <div class="container text-center">
+                    <h2 class="h2 title">Contact</h2>
+                    <ol class="breadcrumb breadcrumb-inverted">
+                        <li><a href="{% url 'home'%}"><span class="icon icon-home"></span></a></li>
+                        <li><a class="active" href="contact.html">Contact</a></li>
+                    </ol>
+                </div>
+            </header>
+        </section>
+
+        <!-- ========================  Contact ======================== -->
+
+        <section class="contact">
+
+            <!-- === Goolge map === -->
+
+            <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2479.3435555593965!2d-0.5705844845377094!3d51.58026657964711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487665f58e23d461%3A0xe27bcc7d348bfbf2!2s67%20Camp%20Rd%2C%20Gerrards%20Cross%20SL9%207PF%2C%20UK!5e0!3m2!1sen!2s!4v1613498534517!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
+                        <div class="contact-block">
+
+                            <div class="contact-info">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <figure class="text-center">
+                                            <span class="icon icon-map-marker"></span>
+                                            <figcaption>
+                                                <strong>Where are we?</strong>
+                                                <span>67 CAMP Road BUCKINGHAMSHIRE, SL97PF</span>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-info">
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-10 text-center">
+                                        <h2 class="title">Send an email</h2>
+                                        <p>
+                                            Thanks for your interest in Mobel Theme. We believe in creativity as one of the major forces of progress.
+                                            Please use this form if you have any questions about our products and we'll get back with you very soon.
+                                        </p>
+
+                                        <div class="contact-form-wrapper">
+
+                                            <a class="btn btn-primary open-form" data-text-open="Contact us via form" data-text-close="Close form">Contact us via form</a>
+
+                                            <div class="contact-form clearfix">
+                                                <form action="#" method="post">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="text" value="" class="form-control" placeholder="Your name" required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <input type="email" value="" class="form-control" placeholder="Your email" required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+
+                                                            <div class="form-group">
+                                                                <input type="text" value="" class="form-control" placeholder="Subject" required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <textarea class="form-control" placeholder="Your message" rows="10"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12 text-center">
+                                                            <input type="submit" class="btn btn-main" value="Send message" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div> <!--/contact-block-->
+                    </div><!--col-sm-8-->
+                </div> <!--/row-->
+            </div><!--/container-->
+        </section>
+
+        <!-- ================== Footer  ================== -->
+
+        <footer>
+            <!--footer showroom-->
+            <div class="footer-showroom hidden">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>Visit our showroom</h2>
+                        <p>200 12th Ave, New York, NY 10001, USA</p>
+                        <p>Mon - Sat: 10 am - 6 pm &nbsp; &nbsp; | &nbsp; &nbsp; Sun: 12pm - 2 pm</p>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <a href="#" class="btn btn-clean"><span class="icon icon-map-marker"></span> Get directions</a>
+                        <div class="call-us h4"><span class="icon icon-phone-handset"></span> 333.278.06622</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--footer links-->
+            <div class="footer-links">
+                <div class="row">
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Browse by</h5>
+                        <ul>
+                            <li><a href="#">Brand</a></li>
+                            <li><a href="#">Product</a></li>
+                            <li><a href="#">Category</a></li>
+                            <li><a href="#">Projects</a></li>
+                            <li><a href="#">Sales</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Quick links</h5>
+                        <ul>
+                            <li><a href="#">In-Store Pickup</a></li>
+                            <li><a href="#">Gift Cards</a></li>
+                            <li><a href="#">Afterpay</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">Store Locator</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Order info</h5>
+                        <ul>
+                            <li><a href="#">Order Status </a></li>
+                            <li><a href="#">Payments</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Exchanges</a></li>
+                            <li><a href="#">Order history</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-2">
+                        <h5>Customer service</h5>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Product Recalls</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Feedback</a></li>
+                            <li><a href="#">Store Pickup</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <h5>Sign up for our newsletter</h5>
+                        <p><i>Add your email address to sign up for our monthly emails and to receive promotional offers.</i></p>
+                        <div class="form-group form-newsletter">
+                            <input class="form-control" type="text" name="email" value="" placeholder="Email address" />
+                            <input type="submit" class="btn btn-main btn-sm" value="Subscribe" />
+                        </div>
+                         <div class="footer-social">
+                <div class="row">
+                    <!-- <div class="col-sm-6">
+                        <a href="#" target="_blank"><i class="fa fa-download"></i> Download Lager</a> &nbsp; | &nbsp; <a href="#">Sitemap</a> &nbsp; | &nbsp; <a href="#">Privacy policy</a>
+                    </div> -->
+                    <div class="col-sm-6 links">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--footer social-->
+
+           
+        </footer>
+
+    </div>
+    <!--/wrapper-->
+
+
+
+    <!--JS files-->
+    {% include 'landing_page/snippets/base_js.html' %}
+
+    <script>
+        function initMap() {
+            var contentString =
+            '<div class="map-info-window">' +
+            '<p><img src="assets/images/logo-dark.png" alt=""></p>' +
+            '<p><strong>Lager Shop - eCommerce Store</strong></p>' +
+            '<p><i class="fa fa-map-marker"></i> 200 12th Ave, New York, NY 10001, USA</p>' +
+            '<p><i class="fa fa-phone"></i> +12 33 444 555</p>' +
+            '<p><i class="fa fa-clock-o"></i> 10am - 6pm</p>' +
+            '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            //set default pposition
+            var myLatLng = { lat: 40.7459772, lng: -74.0545504 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: myLatLng,
+                styles: [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "visibility": "on" }, { "saturation": -100 }, { "lightness": 20 }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "visibility": "on" }, { "saturation": -100 }, { "lightness": 40 }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "visibility": "on" }, { "saturation": -10 }, { "lightness": 30 }] }, { "featureType": "landscape.man_made", "elementType": "all", "stylers": [{ "visibility": "simplified" }, { "saturation": -60 }, { "lightness": 10 }] }, { "featureType": "landscape.natural", "elementType": "all", "stylers": [{ "visibility": "simplified" }, { "saturation": -60 }, { "lightness": 60 }] }, { "featureType": "poi", "elementType": "all", "stylers": [{ "visibility": "off" }, { "saturation": -100 }, { "lightness": 60 }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "visibility": "off" }, { "saturation": -100 }, { "lightness": 60 }] }]
+            });
+            //set marker
+            var image = 'assets/images/map-icon.png';
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: "Hello World!",
+                icon: image
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UQuWHzqyOqHbp4IeFE7-Fa8m41uMTRg&callback=initMap"></script>
+</body>
+
+</html>

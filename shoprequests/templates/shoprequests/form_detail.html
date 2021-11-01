@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block content %}
+ {% include 'snippets/dashboard_sidebar.html' with shop=shop %}
+
+<style>
+.title{
+  font-size:18px;
+  font-weight:400;
+}
+.btn-sample{
+  position:relative;
+  bottom:40px;
+  left:700px;
+}
+</style>
+<div class="alert alert-warning center" role="alert">
+  <h2>You request has been in progress, Please come back later</h2>
+</div>
+<br>
+
+<div class="container ">
+  
+<div class="row">
+<h2>Submitted Details</h2>
+<span class="update-btn btn-sample"><a href="{% url 'shoprequests:shop_form_update' pk=object.pk %}" class="btn btn-success float-right">Update</a></span>
+{% comment %} <span class="col-4"><p class="title">Submitted details</p></span><span class="update-btn col-4"><a href="{% url 'shoprequests:shop_form_update' pk=object.pk %}" class="btn btn-success float-right">Update</a></span> {% endcomment %}
+</div>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Fields</th>
+      <th scope="col">Your details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>First Name </td>
+      <td>{{object.first_name}}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Last Name </td>
+      <td>{{object.last_name}}</td>
+      
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Age</td>
+      <td>{{object.age}}</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Gender</td>
+      <td>{{object.gender}}</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Street Address</td>
+      <td>{{object.street_address}}</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Phone Number</td>
+      <td>{{object.phone_number}}</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>Nationality</td>
+      <td>{{object.nationality}}</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>City</td>
+      <td>{{object.city}}</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Country</td>
+      <td>{{object.country}}</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>State</td>
+      <td>{{object.state}}</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>Zip Code</td>
+      <td>{{object.zip_code}}</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>id_proof</td>
+      <td>{{object.get_id_proof_display}}</td>
+    </tr>
+    <tr>
+      <th scope="row">13</th>
+      <td>Image Proof</td>
+      <td><img src="{{object.id_proof_img.url}}" width="200px" height="auto"/></td>
+    </tr>
+    <tr>
+      <th scope="row">14</th>
+      <td>Shop Title</td>
+      <td>{{object.shop_title}}</td>
+    </tr>
+    <tr>
+      <th scope="row">15</th>
+      <td>Shop Category</td>
+      <td>{{object.shop_category}}</td>
+    </tr>
+    <tr>
+      <th scope="row">16</th>
+      <td>Shop Address</td>
+      <td>{{object.shop_address}}</td>
+    </tr>
+    <tr>
+      <th scope="row">17</th>
+      <td>Address Proof</td>
+      <td>{{object.get_address_proof_display}}</td> 
+    </tr>
+    <tr>
+      <th scope="row">18</th>
+      <td>Address Image Proof</td>
+      <td><img src="{{object.address_proof_img.url}}" width="200px" height="auto"/></td>
+    </tr>
+  </tbody>
+</table>
+  
+</div>
+{% endblock content %}
